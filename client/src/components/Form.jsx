@@ -44,14 +44,14 @@ const MyForm = ({ onSaveStudent, editingStudent, onUpdateStudent }) => {
             })
             .then((data) => {
                 //console.log("From the post ", data);
-                //I'm sending data to the List of Students (the parent) for updating the list
+                //I'm sending data to the List of Students (in the parent) for updating the parents list
                 onSaveStudent(data);
                 //this line just for cleaning the form
-                clearForm();
+                clearForm(); //once you save the student you have to clear the form 
             });
     };
 
-    //A function to handle the post request
+    //A function to handle the put request
     const putStudent = (toEditStudent) => {
         return fetch(`http://localhost:8080/api/students/${toEditStudent.id}`, {
             method: "PUT",

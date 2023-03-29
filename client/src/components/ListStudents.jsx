@@ -11,6 +11,7 @@ const ListStudents = () => {
     //this is the state needed for the UpdateRequest
     const [editingStudent, setEditingStudent] = useState(null)
 
+    //get request fetch 
     const loadStudents = () => {
         // A function to fetch the list of students that will be load anytime that list change
         fetch("http://localhost:8080/api/students")
@@ -20,7 +21,7 @@ const ListStudents = () => {
             });
     }
 
-    useEffect(() => {
+    useEffect(() => { //useEffect is a hook that runs whenever students changed
         loadStudents();
     }, [students]);
 
