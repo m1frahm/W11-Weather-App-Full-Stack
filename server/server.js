@@ -36,10 +36,10 @@ app.post('/api/students', async (req, res) => {
         //console.log([newStudent.firstname, newStudent.lastname, newStudent.iscurrent]);
         const result = await db.query(
             'INSERT INTO students(firstname, lastname, is_current) VALUES($1, $2, $3) RETURNING *',
-            [newStudent.firstname, newStudent.lastname, newStudent.iscurrent],
+           [newStudent.firstname, newStudent.lastname, newStudent.iscurrent], // req.body.firstname
         );
-        console.log(result.rows[0]);
-        res.json(result.rows[0]);
+        console.log(result.rows[0]); // return the first row you added in 
+        res.json(result.rows[0]); //response json send it back to the browser / meaning front end
 
     } catch (e) {
         console.log(e);
@@ -62,11 +62,11 @@ app.delete('/api/students/:studentId', async (req, res) => {
     }
 });
 
-//A put request - Update a student 
+//A put request - Update a student or edit a student 
 app.put('/api/students/:studentId', async (req, res) =>{
     //console.log(req.params);
     //This will be the id that I want to find in the DB - the student to be updated
-    const studentId = req.params.studentId
+    const studentId = req.params.studentId //req is just on the request object 
     const updatedStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname, iscurrent: req.body.is_current}
     console.log("In the server from the url - the student id", studentId);
     console.log("In the server, from the react - the student to be edited", updatedStudent);
